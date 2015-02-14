@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>3D-Deep Data Dive - pelican</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">3D-Deep Data Dive </a></h1>
+                <nav><ul>
+                    <li><a href="/category/python.html">Python</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+
+            <aside id="featured" class="body">
+                <article>
+                    <h1 class="entry-title"><a href="/my-super-post.html">HelloWorld</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2014-12-03T10:20:00+08:00">
+                Published: 三 03 12月 2014
+        </abbr>
+		<br />
+        <abbr class="modified" title="2014-12-05T19:30:00+08:00">
+                Updated: 五 05 12月 2014
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/yschaneason.html">YSChan(Eason)</a>
+        </address>
+<p>In <a href="/category/python.html">Python</a>. </p>
+<p>tags: <a href="/tag/pelican.html">pelican</a> <a href="/tag/publishing.html">publishing</a> </p>
+</footer><!-- /.post-info --><p>This is the content of my super blog post.</p>
+<div class="highlight"><pre>library<span class="p">(</span>datasets<span class="p">)</span>
+data<span class="p">(</span>airquality<span class="p">)</span>
+summary<span class="p">(</span>airquality<span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="c">##      Ozone          Solar.R         Wind            Temp     </span>
+<span class="c">##  Min.   :  1.0   Min.   :  7   Min.   : 1.70   Min.   :56.0  </span>
+<span class="c">##  1st Qu.: 18.0   1st Qu.:116   1st Qu.: 7.40   1st Qu.:72.0  </span>
+<span class="c">##  Median : 31.5   Median :205   Median : 9.70   Median :79.0  </span>
+<span class="c">##  Mean   : 42.1   Mean   :186   Mean   : 9.96   Mean   :77.9  </span>
+<span class="c">##  3rd Qu.: 63.2   3rd Qu.:259   3rd Qu.:11.50   3rd Qu.:85.0  </span>
+<span class="c">##  Max.   :168.0   Max.   :334   Max.   :20.70   Max.   :97.0  </span>
+<span class="c">##  NA&#39;s   :37      NA&#39;s   :7                                   </span>
+<span class="c">##      Month           Day      </span>
+<span class="c">##  Min.   :5.00   Min.   : 1.0  </span>
+<span class="c">##  1st Qu.:6.00   1st Qu.: 8.0  </span>
+<span class="c">##  Median :7.00   Median :16.0  </span>
+<span class="c">##  Mean   :6.99   Mean   :15.8  </span>
+<span class="c">##  3rd Qu.:8.00   3rd Qu.:23.0  </span>
+<span class="c">##  Max.   :9.00   Max.   :31.0  </span>
+<span class="c">## </span>
+</pre></div>
+
+
+<p>Let's first examine how r code being implemented using RMarkdown</p>
+<div class="highlight"><pre>pairs<span class="p">(</span>airquality<span class="p">)</span>
+</pre></div>
+
+
+<p><img alt="plot of chunk unnamed-chunk-2" src="figure/unnamed-chunk-2.png" /> </p>
+<p>Here's a lil regression model</p>
+<div class="highlight"><pre>library<span class="p">(</span>stats<span class="p">)</span>
+fit <span class="o">&lt;-</span> lm<span class="p">(</span>Ozone <span class="o">~</span> Wind <span class="o">+</span> Temp <span class="o">+</span> Solar.R<span class="p">,</span> data <span class="o">=</span> airquality<span class="p">)</span>
+summary<span class="p">(</span>fit<span class="p">)</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span class="c">## </span>
+<span class="c">## Call:</span>
+<span class="c">## lm(formula = Ozone ~ Wind + Temp + Solar.R, data = airquality)</span>
+<span class="c">## </span>
+<span class="c">## Residuals:</span>
+<span class="c">##    Min     1Q Median     3Q    Max </span>
+<span class="c">## -40.48 -14.22  -3.55  10.10  95.62 </span>
+<span class="c">## </span>
+<span class="c">## Coefficients:</span>
+<span class="c">##             Estimate Std. Error t value Pr(&gt;|t|)    </span>
+<span class="c">## (Intercept) -64.3421    23.0547   -2.79   0.0062 ** </span>
+<span class="c">## Wind         -3.3336     0.6544   -5.09  1.5e-06 ***</span>
+<span class="c">## Temp          1.6521     0.2535    6.52  2.4e-09 ***</span>
+<span class="c">## Solar.R       0.0598     0.0232    2.58   0.0112 *  </span>
+<span class="c">## ---</span>
+<span class="c">## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</span>
+<span class="c">## </span>
+<span class="c">## Residual standard error: 21.2 on 107 degrees of freedom</span>
+<span class="c">##   (42 observations deleted due to missingness)</span>
+<span class="c">## Multiple R-squared:  0.606,  Adjusted R-squared:  0.595 </span>
+<span class="c">## F-statistic: 54.8 on 3 and 107 DF,  p-value: &lt;2e-16</span>
+</pre></div>
+
+
+<ul>
+<li>first</li>
+<li>second</li>
+<li>third</li>
+</ul>                </article>
+<p class="paginator">
+    Page 1 / 1
+</p>
+            </aside><!-- /#featured -->
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>blogroll</h2>
+                        <ul>
+                            <li><a href="http://getpelican.com/">Pelican</a></li>
+                            <li><a href="http://python.org/">Python.org</a></li>
+                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="#">You can modify those links in your config file</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="#">You can add links in your config file</a></li>
+                            <li><a href="#">Another social link</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
